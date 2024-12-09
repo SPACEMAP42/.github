@@ -67,7 +67,7 @@ jobs:
           echo 'TODO_OPTION_ID='$(jq '.data.organization.projectV2.fields.nodes[] | select(.name== "Status") | .options[] | select(.name=="Todo") |.id' project_data.json) >> $GITHUB_ENV
 
 # Sets environment variables for this step. `GH_TOKEN` is the token generated in the first step. `PR_ID` is the ID of the pull request that triggered this workflow.
-      - name: Add PR to project
+      - name: Add issue to project
         env:
           GH_TOKEN: ${{ steps.generate-token.outputs.token }}
           ISSUE_ID: ${{ github.event.issue.node_id }}
