@@ -1,7 +1,7 @@
 name: Issue Date Tracker
 on:
   issues:
-    types: [opened, closed]
+    types: [opened]
 jobs:
   track_pr:
     runs-on: ubuntu-latest
@@ -70,7 +70,7 @@ jobs:
       - name: Add PR to project
         env:
           GH_TOKEN: ${{ steps.generate-token.outputs.token }}
-          ISSUE_ID: ${{ github.event.pull_request.node_id }}
+          ISSUE_ID: ${{ github.event.issue.node_id }}
         # Uses [GitHub CLI](https://cli.github.com/manual/) and the API to add the pull request that triggered this workflow to the project. The `jq` flag parses the response to get the ID of the created item.
         run: |
           item_id="$( gh api graphql -f query='
